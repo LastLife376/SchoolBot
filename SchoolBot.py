@@ -1,17 +1,26 @@
-from discord.ext import commands, tasks
 import discord
-import json
-from discord import Embed
-import asyncio
+from discord.ext import commands
+import random
+
+description = '''An example bot to showcase the discord.ext.commands extension
+module.
+There are a number of utility commands being showcased here.'''
 
 
-client = commands.Bot(command_prefix='-')
+bot = commands.Bot(command_prefix='?', description=description)
 
-
-@client.event
+@bot.event
 async def on_ready():
-    await client.change_presence(activity=discord.Game(name="currently being worked on"))
-    print(f'{client.user} is ready!')
+    print('Logged in as')
+    print(bot.user.name)
+    print(bot.user.id)
+    print('------')
 
 
-client.run('ODAzNjUwMTE5MDkwMDQ0OTc4.YBA3fw.OZDwB6yddq0xEejS6fRj0INwFZk')
+@bot.command(name='bot')
+async def _bot(ctx):
+    """Is the bot cool?"""
+    await ctx.send('Hello!')
+
+
+bot.run('ODAzNjUwMTE5MDkwMDQ0OTc4.YBA3fw.3oVtmqvvP-MhcOrtxySXPmfJEEA')
